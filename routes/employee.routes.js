@@ -1,9 +1,7 @@
 const { Router } = require('express')
 const Employee = require('../models/Employee')
 const router = Router()
-const redis = require('redis')
-
-const redisClient = redis.createClient()
+const redisClient = require('../redisClient.js')
 
 router.get('/client-model', async (_, res) => {
   try {
