@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/react';
 
 const NavigationLinks = () => {
   return (
-    <Flex justify="space-around" w="90%" color="blue.300" mt="2">
+    <Flex justify="space-around" w="90%" color="blue.300" my="2">
       <Link to="/ag-grid-client">AG Grid Client</Link>
       <Link to="/ag-grid-infinite"> AG Grid Server</Link>
     </Flex>

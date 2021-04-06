@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import { useHttp } from '../../hooks/useHttp';
-import Loader from '../Loader';
+import Loader from '../Loader.js';
+import AgGridWrapper from './AgGridWrapper.js';
+import { FlushCacheButton } from './FlushCacheButton.js';
 
 const AgGridClient = () => {
   const [gridApi, setGridApi] = useState(null);
@@ -40,35 +42,32 @@ const AgGridClient = () => {
   }, [gridApi]);
 
   return (
-    <Box
-      className="ag-theme-alpine"
-      style={{ height: 600 }}
-      mt="4"
-      mx="2"
-      w="90%"
-    >
-      <AgGridReact
-        rowData={rowData}
-        defaultColDef={{
-          sortable: true,
-          flex: 1,
-          resizable: true,
-          minWidth: 100,
-        }}
-        animateRows={true}
-        onGridReady={onGridReady}
-        loadingOverlayComponent="customLoadingOverlay"
-        frameworkComponents={{
-          customLoadingOverlay: Loader,
-        }}
-      >
-        <AgGridColumn field="firstName" />
-        <AgGridColumn field="lastName" />
-        <AgGridColumn field="age" filter={true} />
-        <AgGridColumn field="country" filter={true} />
-        <AgGridColumn field="company" filter={true} />
-      </AgGridReact>
-    </Box>
+    <Flex w="100%" h="100%" direction="column" alignItems="center" mt="4">
+      <FlushCacheButton />
+      <AgGridWrapper>
+        <AgGridReact
+          rowData={rowData}
+          defaultColDef={{
+            sortable: true,
+            flex: 1,
+            resizable: true,
+            minWidth: 100,
+          }}
+          animateRows={true}
+          onGridReady={onGridReady}
+          loadingOverlayComponent="customLoadingOverlay"
+          frameworkComponents={{
+            customLoadingOverlay: Loader,
+          }}
+        >
+          <AgGridColumn field="firstName" />
+          <AgGridColumn field="lastName" />
+          <AgGridColumn field="age" filter={true} />
+          <AgGridColumn field="country" filter={true} />
+          <AgGridColumn field="company" filter={true} />
+        </AgGridReact>
+      </AgGridWrapper>
+    </Flex>
   );
 };
 

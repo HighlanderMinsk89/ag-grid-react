@@ -13,13 +13,14 @@ import AgGridServer from './components/ag-grid/AgGridServer';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Flex direction="column" alignItems="center">
+      <Flex direction="column" alignItems="center" h="100%">
         <Text fontSize="lg" color="whiteAlpha.900" my="1">
           Kingsmen Software Test
         </Text>
         <Divider />
         <Router>
           <NavigationLinks />
+          <Divider />
           <Switch>
             <Route path="/ag-grid-client" component={AgGridClient} />
             <Route path="/ag-grid-infinite" component={AgGridServer} />

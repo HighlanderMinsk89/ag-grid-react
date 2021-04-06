@@ -2,7 +2,14 @@ import React from 'react';
 
 const Loader = () => {
   return (
-    <div className="lds-ripple">
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
       <div></div>
       <div></div>
     </div>

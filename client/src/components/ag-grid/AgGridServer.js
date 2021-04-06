@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
-import { Box } from '@chakra-ui/react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import { useHttp } from '../../hooks/useHttp';
+import AgGridWrapper from './AgGridWrapper.js';
+import Loader from '../Loader';
 
 const AgGridServer = () => {
   const { request } = useHttp();
@@ -41,13 +42,7 @@ const AgGridServer = () => {
   };
 
   return (
-    <Box
-      className="ag-theme-alpine"
-      style={{ height: 600 }}
-      mt="4"
-      mx="2"
-      w="90%"
-    >
+    <AgGridWrapper>
       <AgGridReact
         defaultColDef={{
           flex: 1,
@@ -68,6 +63,7 @@ const AgGridServer = () => {
             }
           },
         }}
+        frameworkComponents={{ customLoadingOverlay: Loader }}
         rowBuffer={0}
         rowSelection={'multiple'}
         rowModelType={'infinite'}
@@ -115,7 +111,7 @@ const AgGridServer = () => {
           }}
         />
       </AgGridReact>
-    </Box>
+    </AgGridWrapper>
   );
 };
 
