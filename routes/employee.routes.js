@@ -2,6 +2,18 @@ const { Router } = require('express')
 const Employee = require('../models/Employee')
 const router = Router()
 const redisClient = require('../redisClient.js')
+const { promisify } = require('util')
+
+const redisFlushAsync = promisify(redisClient.flushall).bind(redisClient)
+
+router.get('/flush-cache', async (_, res) => {
+  try {
+    await redisFlushAsync()
+    res.json({ message: 'Cache cleared' })
+  } catch (e) {
+    res.status(500).json({ message: "Can't flush cache", error: e.message })
+  }
+})
 
 router.get('/client-model', async (_, res) => {
   try {
@@ -48,7 +60,6 @@ router.post('/infinite-model', async (req, res) => {
     const lastRowIndex = getLastRowIndex(startRow, endRow, rows.length)
     res.status(200).json({ rows, lastRowIndex })
   } catch (e) {
-    console.log(e)
     res
       .status(500)
       .json({ message: "Can't get employees! Server error", error: e.message })
