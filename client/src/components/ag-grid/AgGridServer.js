@@ -5,7 +5,6 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import { useHttp } from '../../hooks/useHttp';
 import AgGridWrapper from './AgGridWrapper.js';
-import Loader from '../Loader';
 
 const AgGridServer = () => {
   const { request } = useHttp();
@@ -53,26 +52,13 @@ const AgGridServer = () => {
           minWidth: 100,
         }}
         animateRows={true}
-        loadingOverlayComponent="customLoadingOverlay"
-        components={{
-          loadingRenderer: function (params) {
-            if (params.value !== undefined) {
-              return params.value;
-            } else {
-              return '<img src="https://www.ag-grid.com/example-assets/loading.gif">';
-            }
-          },
-        }}
-        frameworkComponents={{ customLoadingOverlay: Loader }}
         rowBuffer={0}
-        rowSelection={'multiple'}
         rowModelType={'infinite'}
         paginationPageSize={100}
-        cacheOverflowSize={2}
         maxConcurrentDatasourceRequests={1}
-        infiniteInitialRowCount={1000}
         maxBlocksInCache={10}
         onGridReady={onGridReady}
+        loading
       >
         <AgGridColumn
           field="firstName"

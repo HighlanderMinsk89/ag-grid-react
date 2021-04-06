@@ -60,11 +60,16 @@ const AgGridClient = () => {
             customLoadingOverlay: Loader,
           }}
         >
-          <AgGridColumn field="firstName" />
-          <AgGridColumn field="lastName" />
-          <AgGridColumn field="age" filter={true} />
-          <AgGridColumn field="country" filter={true} />
-          <AgGridColumn field="company" filter={true} />
+          <AgGridColumn field="firstName" rowGroupIndex={0} />
+          <AgGridColumn field="lastName" rowGroupIndex={1} />
+          <AgGridColumn field="age" filter={true} rowGroupIndex={2} />
+          <AgGridColumn
+            field="country"
+            filter={true}
+            enableRowGroup={true}
+            rowGroupIndex={3}
+          />
+          <AgGridColumn field="company" filter={true} rowGroupIndex={4} />
         </AgGridReact>
       </AgGridWrapper>
     </Flex>
